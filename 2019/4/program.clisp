@@ -1,0 +1,17 @@
+(defun no-decrease (start x) (if (> x 0) (if (<= (mod x 10) start) (no-decrease (mod x 10) (truncate x 10)) 0) 1))
+;Part 1
+(defun two-same (x) (if (> x 0) (if (= (mod x 10) (mod (truncate x 10) 10)) 1 (two-same (truncate x 10))) 0))
+; Part 2
+(defun two-same-restrict (x cur-digit cur-count) 
+    (cond 
+        ((and (> x 0) (= (mod x 10) cur-digit)) (two-same-restrict (truncate x 10) cur-digit (+ cur-count 1)))
+        ((and (= cur-count 2) (/= (mod x 10) cur-digit)) 1)
+        ((> x 0) (two-same-restrict (truncate x 10) (mod x 10) 1))
+        (t 0)
+    )
+)
+(defun correct (x) (= 2 (+ (no-decrease (mod x 10) (truncate x 10)) (two-same-restrict x 0 0))))
+(defun count-number (start end) (loop for i from start to end
+   sum (if (correct i) 1 0)
+))
+(write (count-number (read) (read)))
