@@ -27,9 +27,6 @@
 
 \typeout{Loaded file}
 
-\newcommand\inputone{\input}
-\newcommand\inputtwo{\input}
-
 \newarray\bitmap
 \expandarrayelementtrue
 
@@ -62,17 +59,19 @@
 
 
 \newcount\minzero
+\newcount\minlayer
 \minzero=\pixelcount
 \newcount\onetimestwo
 \newcount\ones
 \newcount\twos
+\newcount\layernr
 
 \newcount\counter
 \counter=0
 \loop
     \typeout{\the\counter}
-    \StrLeft{\inputone}{\pixelcount}[\layer]
-    \StrGobbleLeft{\inputone}{\pixelcount}[\inputone]
+    \StrLeft{\input}{\pixelcount}[\layer]
+    \StrGobbleLeft{\input}{\pixelcount}[\input]
     \StrLen{\layer}[\layerlength]
     \ifnum \layerlength=\pixelcount
         \updatelayer{\layer}
@@ -81,13 +80,15 @@
             \StrCount{\layer}{1}[\onecount]
             \StrCount{\layer}{2}[\twocount]
             \minzero=\zerocount
+            \minlayer=\layernr
             \ones=\onecount
             \twos=\twocount
             \onetimestwo=\the\numexpr \onecount * \twocount \relax
         \fi
     \fi
     \advance \counter \pixelcount
-\ifx\inputone\empty
+    \advance \layernr 1
+\ifx\input\empty
 \else
 \repeat
 
@@ -97,7 +98,9 @@
 
 \section{Part 1}
 
-Error detection. Get layer with the fewest zeros.
+Error detection. Get the layer with the fewest zeros
+
+Layer: \the\minlayer
 
 Zeros: \the\minzero
 
