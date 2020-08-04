@@ -17,11 +17,11 @@ In this advent of code we tried to solve every day in a different challenge.
 
 ### Day 4
 
-We first tried to solve the challenge in **Chef** but that language did not support 
-rounging or casting to int so the challenge was not solvable (or a real pain to try to solve).
+We first looked at **LeGit**. It is a brainfuck clone with git repos. But Legit only treats 
+numbers as numbers when they are hardcoded - otherwise, they're ASCII.
 
-Then we looked at **LeGit** but it was just a brainfuck clone with git repos that was not interesting
-enough to use.
+Then we tried to solve the challenge in **Chef** but that language did not support 
+rounging or casting to int so the challenge was not solvable (or a real pain to try to solve).
 
 ### Day 8
 
