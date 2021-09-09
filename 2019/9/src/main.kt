@@ -51,6 +51,7 @@ class Memory(program: List<Long>) {
     }
 
     operator fun get(addr: Long): Long {
+        if(addr < 0) throw RuntimeException("Invalid address '$addr'")
         var page = memMap[addr / FRAME_SIZE]
         if (page == null) {
             page = MutableList<Long>(FRAME_SIZE) { 0 }
@@ -60,6 +61,7 @@ class Memory(program: List<Long>) {
     }
 
     operator fun set(addr: Long, value: Long) {
+        if(addr < 0) throw RuntimeException("Invalid address '$addr'")
         var page = memMap[addr / FRAME_SIZE]
         if (page == null) {
             page = MutableList<Long>(FRAME_SIZE) { 0 }
@@ -95,7 +97,7 @@ class Interpreter(private val program: Memory) {
 
     @Suppress("UNUSED_PARAMETER")
     private fun outputOp(dest: ArgumentMode, ignored1: ArgumentMode, ignored2: ArgumentMode) {
-        print(dest.getValue())
+        println(dest.getValue())
         pc += 2
     }
 
@@ -152,7 +154,7 @@ class Interpreter(private val program: Memory) {
             val op = program[pc]
             val arg1 = getMode(op / 100 % 10, program[pc + 1])
             val arg2 = getMode(op / 1000 % 10, program[pc + 2])
-            val arg3 = getMode(op / 10000 % 10, program[pc + 3])
+            val arg3 = getMode(op / 10000 % 10, program[pc +  3])
             when (op % 100) {
                 1L -> addOp(arg1, arg2, arg3)
                 2L -> multOp(arg1, arg2, arg3)
@@ -177,7 +179,7 @@ fun readInput(file: String): List<Long> {
 
 @Suppress("UNUSED_PARAMETER")
 fun main(args: Array<String>) {
-    val res = readInput("input.txt")
+    val res = readInput("debug.txt")
     val peter = Interpreter(Memory(res))
     peter.run()
 }

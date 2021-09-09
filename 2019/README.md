@@ -12,7 +12,7 @@ In this advent of code we tried to solve every day in a different challenge.
 | 6   | Bash      |
 | 7   | Lua       |
 | 8   | LaTex     |
-| 9   | ?         |
+| 9   | Kotlin    |
 
 ## Remarks
 
