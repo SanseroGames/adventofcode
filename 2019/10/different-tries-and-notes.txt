@@ -1,0 +1,134 @@
+What I did:
+	In a first step I searched for a method to calculate visibility for a given asteroid position
+	Find a way to represent ray for each asteroid from given source
+	Count unique ray representation
+    Then scale it up to all asteroids using Array functions
+
+
+
+=IF((COLUMN(A50)-1-$AJ$1+ROW(A50)-1-$AJ$2)>0
+    IF(
+        A50="#";
+        (COLUMN(A50)-1-$AJ$1)/
+            (GCD(
+                ABS(ROW(A50)-1-$AJ$2);
+                ABS(COLUMN(A50)-1-$AJ$1)))
+            &","&(ROW(A50)-1-$AJ$2)/(GCD(
+                ABS(ROW(A50)-1-$AJ$2);
+                ABS(COLUMN(A50)-1-$AJ$1)));
+        "");
+    ""
+    )
+
+
+=SUM(
+    IF(
+        ISERROR(AT48:AX52);
+        "";
+        IF(
+            ISBLANK(AT48:AX52);
+            "";
+            1/COUNTIF(
+                AT48:AX52;
+                AT48:AX52))))-1
+
+=SUM(
+    IF(
+        ISERROR(AL50:AP54);
+        "";
+        1/COUNTIF(
+            AL50:AP54;
+            AL50:AP54)
+        )
+    )-1
+
+=IF((COLUMN(A50:E54)-1-$AJ$1+ROW(A50:E54)-1-$AJ$2)>0;IF(E54="#";(COLUMN(A50:E54)-1-$AJ$1)/(GCD(ABS(ROW(A50:E54)-1-$AJ$2);ABS(COLUMN(A50:E54)-1-$AJ$1)))&","&(ROW(A50:E54)-1-$AJ$2)/(GCD(ABS(ROW(A50:E54)-1-$AJ$2);ABS(COLUMN(A50:E54)-1-$AJ$1)));"");"")
+=IF(A50:E54="#";(COLUMN(A50:E54)-1-$AJ$1)/(GCD(ABS(ROW(A50:E54)-1-$AJ$2);ABS(COLUMN(A50:E54)-1-$AJ$1)))&","&(ROW(A50:E54)-1-$AJ$2)/(GCD(ABS(ROW(A50:E54)-1-$AJ$2);ABS(COLUMN(A50:E54)-1-$AJ$1)));"")
+
+=SUM(1/COUNTIF(
+    ;
+    AL50:AP54))-1$
+
+
+=(COLUMN(A37:J46)-1-$AJ$50)/SQRT(POWER((COLUMN(A37:J46)-1-$AJ$50);2)+POWER((ROW(A37:J46)-1-$AJ$51);2))&","&(ROW(A37:J46)-1-$AJ$51)
+=POWER((COLUMN(A37:J46)-1-$AJ$50);2)+POWER((ROW(A37:J46)-1-$AJ$51);2)
+=(COLUMN(A37:J46)-1-$AJ$50)/SQRT(POWER((COLUMN(A37:J46)-1-$AJ$50);2)+POWER((ROW(A37:J46)-1-$AJ$51);2))
+
+=(COLUMN(A37:J46)-1-$AJ$50)/SQRT(POWER((COLUMN(A37:J46)-1-$AJ$50);2)+POWER((ROW(A37:J46)-1-$AJ$51);2))&","&(ROW(A37:J46)-1-$AJ$51)/SQRT(POWER((COLUMN(A37:J46)-1-$AJ$50);2)+POWER((ROW(A37:J46)-1-$AJ$51);2))
+=ROUND((COLUMN(A37)-1-$AJ$50)/SQRT(POWER((COLUMN(A37)-1-$AJ$50);2)+POWER((ROW(A37)-1-$AJ$51);2));6)&","&ROUND((ROW(A37)-1-$AJ$51)/SQRT(POWER((COLUMN(A37)-1-$AJ$50);2)+POWER((ROW(A37)-1-$AJ$51);2));6)
+
+=IF(ROUND((COLUMN(A37)-1-$AJ$50)/SQRT(POWER((COLUMN(A37)-1-$AJ$50);2)+POWER((ROW(A37)-1-$AJ$51);2));6)&","&ROUND((ROW(A37)-1-$AJ$51)/SQRT(POWER((COLUMN(A37)-1-$AJ$50);2)+POWER((ROW(A37)-1-$AJ$51);2));6))
+
+=IF(ABS(COLUMN(A37:J46)-1-$AJ$50)+ABS(ROW(A37:J46)-1-$AJ$51)>0;(COLUMN(A37:J46)-1-$AJ$50)/SQRT(POWER((COLUMN(A37:J46)-1-$AJ$50);2)+POWER((ROW(A37:J46)-1-$AJ$51);2))&","&(ROW(A37:J46)-1-$AJ$51)/SQRT(POWER((COLUMN(A37:J46)-1-$AJ$50);2)+POWER((ROW(A37:J46)-1-$AJ$51);2));"")
+
+
+
+=IF(A37:J46="#";IF(ABS(COLUMN(A37:J46)-1-$AJ$50)+ABS(ROW(A37:J46)-1-$AJ$51)>0;(COLUMN(A37:J46)-1-$AJ$50)/SQRT(POWER((COLUMN(A37:J46)-1-$AJ$50);2)+POWER((ROW(A37:J46)-1-$AJ$51);2))+100*(ROW(A37:J46)-1-$AJ$51)/SQRT(POWER((COLUMN(A37:J46)-1-$AJ$50);2)+POWER((ROW(A37:J46)-1-$AJ$51);2));"");"")
+
+
+
+=IF($A$37:$J$46="#";IF(ABS(COLUMN($A$37:$J$46)-(COLUMN(A37)))+ABS(ROW($A$37:$J$46)-ROW(A37))>0;(COLUMN($A$37:$J$46)-COLUMN(A37))/SQRT(POWER((COLUMN($A$37:$J$46)-COLUMN(A37));2)+POWER((ROW($A$37:$J$46)-ROW(A37));2))+100*(ROW($A$37:$J$46)-ROW(A37))/SQRT(POWER((COLUMN($A$37:$J$46)-COLUMN(A37));2)+POWER((ROW($A$37:$J$46)-ROw(A37));2));"");"")
+
+=SUM(1/COUNTIF(IF($A$37:$J$46="#";IF(ABS(COLUMN($A$37:$J$46)-(COLUMN(A37)))+ABS(ROW($A$37:$J$46)-ROW(A37))>0;(COLUMN($A$37:$J$46)-COLUMN(A37))/SQRT(POWER((COLUMN($A$37:$J$46)-COLUMN(A37));2)+POWER((ROW($A$37:$J$46)-ROW(A37));2))+100*(ROW($A$37:$J$46)-ROW(A37))/SQRT(POWER((COLUMN($A$37:$J$46)-COLUMN(A37));2)+POWER((ROW($A$37:$J$46)-ROw(A37));2));"");"");IF($A$37:$J$46="#";IF(ABS(COLUMN($A$37:$J$46)-(COLUMN(A37)))+ABS(ROW($A$37:$J$46)-ROW(A37))>0;(COLUMN($A$37:$J$46)-COLUMN(A37))/SQRT(POWER((COLUMN($A$37:$J$46)-COLUMN(A37));2)+POWER((ROW($A$37:$J$46)-ROW(A37));2))+100*(ROW($A$37:$J$46)-ROW(A37))/SQRT(POWER((COLUMN($A$37:$J$46)-COLUMN(A37));2)+POWER((ROW($A$37:$J$46)-ROw(A37));2));"");"")))-1
+
+
+=IF(A37="#";SUM(1/COUNTIF(IF($A$37:$J$46="#";IF(ABS(COLUMN($A$37:$J$46)-(COLUMN(A37)))+ABS(ROW($A$37:$J$46)-ROW(A37))>0;(COLUMN($A$37:$J$46)-COLUMN(A37))/SQRT(POWER((COLUMN($A$37:$J$46)-COLUMN(A37));2)+POWER((ROW($A$37:$J$46)-ROW(A37));2))+100*(ROW($A$37:$J$46)-ROW(A37))/SQRT(POWER((COLUMN($A$37:$J$46)-COLUMN(A37));2)+POWER((ROW($A$37:$J$46)-ROw(A37));2));"");"");IF($A$37:$J$46="#";IF(ABS(COLUMN($A$37:$J$46)-(COLUMN(A37)))+ABS(ROW($A$37:$J$46)-ROW(A37))>0;(COLUMN($A$37:$J$46)-COLUMN(A37))/SQRT(POWER((COLUMN($A$37:$J$46)-COLUMN(A37));2)+POWER((ROW($A$37:$J$46)-ROW(A37));2))+100*(ROW($A$37:$J$46)-ROW(A37))/SQRT(POWER((COLUMN($A$37:$J$46)-COLUMN(A37));2)+POWER((ROW($A$37:$J$46)-ROw(A37));2));"");"")))-1;"")
+
+final
+
+=IF($A$1:$AG$29="#";IF(ABS(COLUMN($A$1:$AG$29)-(COLUMN(A1)))+ABS(ROW($A$1:$AG$29)-ROW(A1))>0;(COLUMN($A$1:$AG$29)-COLUMN(A1))/SQRT(POWER((COLUMN($A$1:$AG$29)-COLUMN(A1));2)+POWER((ROW($A$1:$AG$29)-ROW(A1));2))+100*(ROW($A$1:$AG$29)-ROW(A1))/SQRT(POWER((COLUMN($A$1:$AG$29)-COLUMN(A1));2)+POWER((ROW($A$1:$AG$29)-ROw(A1));2));"");"")
+
+=IF(A1="#";SUM(1/COUNTIF(IF($A$1:$AG$33="#";IF(ABS(COLUMN($A$1:$AG$33)-(COLUMN(A1)))+ABS(ROW($A$1:$AG$33)-ROW(A1))>0;(COLUMN($A$1:$AG$33)-COLUMN(A1))/SQRT(POWER((COLUMN($A$1:$AG$33)-COLUMN(A1));2)+POWER((ROW($A$1:$AG$33)-ROW(A1));2))+100*(ROW($A$1:$AG$33)-ROW(A1))/SQRT(POWER((COLUMN($A$1:$AG$33)-COLUMN(A1));2)+POWER((ROW($A$1:$AG$33)-ROw(A1));2));"");"");IF($A$1:$AG$33="#";IF(ABS(COLUMN($A$1:$AG$33)-(COLUMN(A1)))+ABS(ROW($A$1:$AG$33)-ROW(A1))>0;(COLUMN($A$1:$AG$33)-COLUMN(A1))/SQRT(POWER((COLUMN($A$1:$AG$33)-COLUMN(A1));2)+POWER((ROW($A$1:$AG$33)-ROW(A1));2))+100*(ROW($A$1:$AG$33)-ROW(A1))/SQRT(POWER((COLUMN($A$1:$AG$33)-COLUMN(A1));2)+POWER((ROW($A$1:$AG$33)-ROw(A1));2));"");"")))-1;"")
+
+
+As Array function
+
+{=IF(
+	AD29="#";
+	SUM(
+		1/COUNTIF( // Count unique. COUNTIF counts how often a value appears and we see this value that many times. so by 1/COUNTIF we will get 1 for each unique entry. Returns an array
+			// Lets say there are 50*1 20*2 and 1*0. For each of the 1s COUNTIF returns 50. For each of the 2s 20 and for the 0 it returns a 1. Each of those values is n*1/n=n. So we have 50 times 1/50 which results in 1. So in total we know how many individual elements there are.
+			
+			// calculate for each meteor a ray representation for each other meteor
+			IF(
+			$A$1:$AG$33="#"; // is meteor
+			IF(
+				ABS(
+					COLUMN($A$1:$AG$33)-(COLUMN(AD29))  // X distance
+				)+ABS(
+					ROW($A$1:$AG$33)-ROW(AD29)  // y distance
+				)>0;( // is not itself
+					COLUMN($A$1:$AG$33)-COLUMN(AD29)
+				)/SQRT(
+					POWER((COLUMN($A$1:$AG$33)-COLUMN(AD29));2)
+					+POWER((ROW($A$1:$AG$33)-ROW(AD29));2)
+				)+100*(
+					ROW($A$1:$AG$33)-ROW(AD29)
+				)/SQRT(
+					POWER((COLUMN($A$1:$AG$33)-COLUMN(AD29));2)
+					+POWER((ROW($A$1:$AG$33)-ROW(AD29));2)
+				)
+				;"")
+			;"")
+			
+		// Calculate representation again as Formulas cannot reuse data from other part of formula. Would need to be stored in cells but we don't want that (too much data)
+		;IF(
+			$A$1:$AG$33="#"; // is meteor
+			IF(
+				ABS(COLUMN($A$1:$AG$33)-(COLUMN(AD29)))
+				+ABS(ROW($A$1:$AG$33)-ROW(AD29))>0;
+				(COLUMN($A$1:$AG$33)-COLUMN(AD29)
+				)/SQRT(
+					POWER((COLUMN($A$1:$AG$33)-COLUMN(AD29));2)
+					+POWER((ROW($A$1:$AG$33)-ROW(AD29));2)
+				)+100*(
+					ROW($A$1:$AG$33)-ROW(AD29)
+				)/SQRT(
+					POWER((COLUMN($A$1:$AG$33)-COLUMN(AD29));2)
+					+POWER((ROW($A$1:$AG$33)-ROW(AD29));2))
+				;"")
+			;"")
+		)
+	)-1; // subtract empty space
+	""
+)}

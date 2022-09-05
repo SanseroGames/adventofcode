@@ -2,17 +2,18 @@
 
 In this advent of code we tried to solve every day in a different challenge.
 
-| Day | Language  |
-|-----|-----------|
-| 1   | Minkolang |
-| 2   | Lolcode   |
-| 3   | Cobol     |
-| 4   | Lisp      |
-| 5   | PHP       |
-| 6   | Bash      |
-| 7   | Lua       |
-| 8   | LaTex     |
-| 9   | Kotlin    |
+| Day | Language            |
+|-----|---------------------|
+| 1   | Minkolang           |
+| 2   | Lolcode             |
+| 3   | Cobol               |
+| 4   | Lisp                |
+| 5   | PHP                 |
+| 6   | Bash                |
+| 7   | Lua                 |
+| 8   | LaTex               |
+| 9   | Kotlin              |
+| 10  | Spreadsheet Formula |
 
 ## Remarks
 
@@ -30,3 +31,7 @@ We first wanted to solve the challenge in **Velato**, a language written in midi
 language cannot read from standard in and it does not support arrays, so encoding 15000 numbers
 in an integer is not feasable.
 
+
+### Day 10
+
+Solving the challenge in spreadsheet formulas is painfull. Especially if you have to copy paste formulas and make sure the references are still correct. Also array functions are weird and there are no loops.

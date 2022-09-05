@@ -1,0 +1,80 @@
+Solution explanation
+
+The problem with Excel-formulas is that you cannot really create a loop. Also depending on values that have been calculated previously only really works when referencing other cells which were precalculated. 
+
+So I use 200 tables for each iteration to find out which coordinate is destroyed at position 200.
+
+A table has 4 components
+
+|---------------------------|-----------|
+| Each cell holds the angle | Min angle |
+| in respect to station     | for each  |
+| 0 is on top               | row       |
+|---------------------------|-----------|
+| Min angle for each column | lowest angle > last angle which is closest to station
+|---------------------------|-----------|
+| X to delete, Y to delete, last angle  |
+|---------------------------------------|
+
+In each new table iteration the field that has been determined to delete in the last table is cleared. then the next field is searched that has a bigger angle than the one found last
+
+Once we reach the highest still available angle in the field we start again at an angle of 0°
+
+
+
+Old solution
+
+=IF(
+    AD29="#"; // there is an asteroid
+    (
+        COLUMN(AD29)-1-$AJ$3 // X coordinate relative to station
+    )/(
+        GCD(
+            ABS(
+                ROW(AD29)-1-$AJ$4
+                );
+            ABS(
+                COLUMN(AD29)-1-$AJ$3)
+            )
+        ) & "," & (
+            ROW(AD29)-1-$AJ$4 // y coordinate relative to station
+        )/(
+            GCD(
+                ABS(
+                    ROW(AD29)-1-$AJ$4 
+                    );
+                ABS(
+                    COLUMN(AD29)-1-$AJ$3
+                    )
+                )
+            ) & " - " & (
+                (ROW(AD29)-1-$AJ$4) / (COLUMN(AD29)-1-$AJ$3)
+            )
+        ;
+        ""
+        )
+
+
+
+
+Testing case
+=IF(A43="#";(COLUMN(A43)-1-$AJ$43)/(GCD(ABS(ROW(A43)-1-$AJ$44);ABS(COLUMN(A43)-1-$AJ$43)))&","&(ROW(A43)-1-$AJ$44)/(GCD(ABS(ROW(A43)-1-$AJ$44);ABS(COLUMN(A43)-1-$AJ$43)));"")
+
+=IF(A43="#";(COLUMN(A43)-1-$AJ$43)& "," & (ROW(A43)-1-$AJ$44)  & "," & (ROW(A43)-1-$AJ$44) / (COLUMN(A43)-1-$AJ$43);IF(A43="X";"XXX";""))
+
+=IF(I43="#";(COLUMN(I43)-1-$AJ$43)& "," & (ROW(I43)-1-$AJ$44)  & "," & DEGREES(ATAN2((COLUMN(I43)-1-$AJ$43); (ROW(I43)-1-$AJ$44)));IF(I43="X";"XXX";""))
+
+=IF(I45="#";(COLUMN(I45)-1-$AJ$43)& "," & -(ROW(I45)-1-$AJ$44)  & "," & DEGREES(ATAN2(-(ROW(I45)-1-$AJ$44);(COLUMN(I45)-1-$AJ$43)))+180;IF(I45="X";"XXX";""))
+
+
+=IF(I43="#";-(COLUMN(I43)-1-$AJ$43)& "," & (ROW(I43)-1-$AJ$44)  & "," & MOD(DEGREES(ATAN2((ROW(I43)-1-$AJ$44);-(COLUMN(I43)-1-$AJ$43)))+180;360);IF(I43="X";"XXX";""))
+
+=IF(I43="#";MOD(DEGREES(ATAN2((ROW(I43)-1-$AJ$44);-(COLUMN(I43)-1-$AJ$43)))+180;360);IF(I43="X";"XXX";""))
+
+=IF(COUNTIF(IF(AL43:BB47>AK49;AL43:BB47;"");"")+1=COUNTA(IF(AL43:BB47>AK49;AL43:BB47;""));-1;MIN(IF(AL43:BB47>AK49;AL43:BB47)))
+
+
+=IF(AND(-(COLUMN(AL63)-COLUMN(AL63)-$AJ$63)=BD68;ROW(AL63)-$AJ$64=BE68);"";AL63)
+
+=MIN(IF(COUNTIF(BC273:BC277;-1)=COUNTA(BC273:BC277);-1;IF(AL278:BB278>=0;AL278:BB278;""));IF(BC273:BC277>=0;BC273:BC277;""))
+
